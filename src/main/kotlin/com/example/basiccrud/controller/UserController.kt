@@ -29,9 +29,10 @@ class UserController(
     }
 
     @GetMapping("/{id}")
-    fun getUserById(@PathVariable id: Long): ResponseEntity<User> {
+    fun getUserById(@PathVariable id: Long): ResponseEntity<UserResponseDto> {
         val user: User = userService.getUserById(id)
-        return ResponseEntity.ok(user)
+        val userResponseDto: UserResponseDto = UserResponseDto.fromUser(user)
+        return ResponseEntity.ok(userResponseDto)
     }
 
     @PostMapping
